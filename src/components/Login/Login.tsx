@@ -74,7 +74,7 @@ const Login: FC<LoginProps> = ({redirectTo}) => {
                                     type="password"
                                     name="password"
                                     id="inputPassword"
-                                    autoComplete="password"
+                                    autoComplete="current-password"
                                     onChange={formik.handleChange}
                                     value={formik.values.password}
                                     required
