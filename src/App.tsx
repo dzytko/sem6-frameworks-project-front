@@ -1,26 +1,47 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, {Dispatch, SetStateAction, useEffect} from 'react';
 import './App.scss';
+import {isTokenExpired} from './utils/jwt-utils';
+import Layout from './components/Layout/Layout';
+import {Route, Routes} from 'react-router-dom';
+import Login from './components/Login/Login';
+import Register from './components/Register/Register';
+
+export const TokenContext = React.createContext<{ token: string; setToken: Dispatch<SetStateAction<string>>; }>(
+    {
+        token: '',
+        setToken: () => {
+        }
+    }
+);
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    const [token, setToken] = React.useState<string>(localStorage.getItem('jwtToken') ?? '');
+
+    useEffect(() => {
+        document.title = 'ShopName';
+
+        const checkToken = () => {
+            if (!token) {
+                return;
+            }
+            if (isTokenExpired(token)) {
+                localStorage.removeItem('jwtToken');
+                setToken('');
+            }
+        };
+        checkToken();
+    }, [token]);
+
+    return (
+        <TokenContext.Provider value={{token, setToken}}>
+            <Layout>
+                <Routes>
+                    <Route path="/login" element={<Login redirectTo="/"/>}/>
+                    <Route path="/register" element={<Register redirectTo="/"/>}/>
+                </Routes>
+            </Layout>
+        </TokenContext.Provider>
+    );
 }
 
 export default App;
