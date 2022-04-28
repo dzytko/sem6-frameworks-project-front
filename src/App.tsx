@@ -3,8 +3,10 @@ import './App.scss';
 import {isTokenExpired} from './utils/jwt-utils';
 import Layout from './components/Layout/Layout';
 import {Route, Routes} from 'react-router-dom';
-import Login from './components/Login/Login';
-import Register from './components/Register/Register';
+import Login from './components/Auth/Login';
+import Register from './components/Auth/Register';
+import AccountManagement from './components/AccountManagement/AccountManagement';
+import ProtectedRoute from './components/Auth/ProtectedRoute';
 
 export const TokenContext = React.createContext<{ token: string; setToken: Dispatch<SetStateAction<string>>; }>(
     {
@@ -38,6 +40,10 @@ function App() {
                 <Routes>
                     <Route path="/login" element={<Login redirectTo="/"/>}/>
                     <Route path="/register" element={<Register redirectTo="/"/>}/>
+
+                    <Route element={<ProtectedRoute/>}>
+                        <Route path="/account" element={<AccountManagement/>}/>
+                    </Route>
                 </Routes>
             </Layout>
         </TokenContext.Provider>
