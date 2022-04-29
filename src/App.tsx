@@ -7,6 +7,7 @@ import Login from './components/Auth/Login';
 import Register from './components/Auth/Register';
 import AccountManagement from './components/AccountManagement/AccountManagement';
 import ProtectedRoute from './components/Auth/ProtectedRoute';
+import Product from './components/Product/Product';
 
 export const TokenContext = React.createContext<{ token: string; setToken: Dispatch<SetStateAction<string>>; }>(
     {
@@ -40,6 +41,7 @@ function App() {
                 <Routes>
                     <Route path="/login" element={<Login redirectTo="/"/>}/>
                     <Route path="/register" element={<Register redirectTo="/"/>}/>
+                    <Route path="/product/:id" element={<Product/>}/>
 
                     <Route element={<ProtectedRoute/>}>
                         <Route path="/account" element={<AccountManagement/>}/>
