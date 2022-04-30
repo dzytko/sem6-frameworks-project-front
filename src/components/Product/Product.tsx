@@ -1,5 +1,5 @@
-import React, {FC, useContext, useEffect} from 'react';
-import {Col, Row, Card, Form, Button, Toast, Alert} from 'react-bootstrap';
+import React, {FC, useContext, useEffect, useState} from 'react';
+import {Alert, Button, Card, Col, Form, Row, Toast} from 'react-bootstrap';
 import useAxios from '../../hooks/useAxios';
 import {useNavigate, useParams} from 'react-router-dom';
 import CardHeader from 'react-bootstrap/CardHeader';
@@ -19,10 +19,10 @@ const Product: FC<ProductProps> = () => {
     let {id} = useParams();
     const axios = useAxios();
     const navigate = useNavigate();
-    const [product, setProduct] = React.useState<ProductType>();
-    const [showSuccessToast, setShowSuccessToast] = React.useState<boolean>(false);
-    const [categories, setCategories] = React.useState<CategoryType[]>();
-    const [imagePath, setImagePath] = React.useState<string>('');
+    const [product, setProduct] = useState<ProductType>();
+    const [showSuccessToast, setShowSuccessToast] = useState<boolean>(false);
+    const [categories, setCategories] = useState<CategoryType[]>();
+    const [imagePath, setImagePath] = useState<string>('');
     const {token} = useContext(TokenContext);
 
     useEffect(() => {
