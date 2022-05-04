@@ -9,13 +9,13 @@ import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import {faShoppingCart} from '@fortawesome/free-solid-svg-icons';
 import {ProductType} from '../../types/ProductType';
 import {CategoryType} from '../../types/CategoryType';
-import './Product.scss';
+import './ProductPage.scss';
 import {TokenContext} from '../../App';
 
 interface ProductProps {
 }
 
-const Product: FC<ProductProps> = () => {
+const ProductPage: FC<ProductProps> = () => {
     let {id} = useParams();
     const axios = useAxios();
     const navigate = useNavigate();
@@ -168,4 +168,4 @@ const Product: FC<ProductProps> = () => {
     );
 };
 
-export default Product;
+export default ProductPage;
