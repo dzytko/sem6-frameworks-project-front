@@ -10,6 +10,7 @@ import ProtectedRoute from './components/Auth/ProtectedRoute';
 import ProductPage from './components/ProductPage/ProductPage';
 import Cart from './components/Cart/Cart';
 import ProductsPage from './components/ProductsPage/ProductsPage';
+import Checkout from './components/Checkout/Checkout';
 
 export const TokenContext = React.createContext<{ token: string; setToken: Dispatch<SetStateAction<string>>; }>(
     {
@@ -42,7 +43,7 @@ function App() {
             <Layout>
                 <Routes>
                     <Route path="/login" element={<Login redirectTo="/"/>}/>
-                    <Route path="/register" element={<Register redirectTo="/"/>}/>
+                    <Route path="/register" element={<Register redirectTo="/login"/>}/>
                     <Route path="/product/:id" element={<ProductPage/>}/>
                     <Route path="/category/:selectedCategoryId" element={<ProductsPage/>}/>
                     <Route path="/" element={<ProductsPage/>}/>
@@ -50,6 +51,7 @@ function App() {
                     <Route element={<ProtectedRoute/>}>
                         <Route path="/account" element={<AccountManagement/>}/>
                         <Route path="/cart" element={<Cart/>}/>
+                        <Route path="/checkout" element={<Checkout/>}/>
                     </Route>
                 </Routes>
             </Layout>

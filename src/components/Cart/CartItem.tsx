@@ -51,7 +51,6 @@ const CartItem: React.FC<cartItemProps> = ({id, product, quantity, setCartItems}
                 setImagePath(URL.createObjectURL(response.data));
             })
             .catch((err: AxiosError) => {
-                console.log(err);
                 setImagePath('');
             });
     }, [product]);
