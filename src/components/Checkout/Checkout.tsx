@@ -50,7 +50,7 @@ interface checkoutProps {
 const Checkout: React.FC<checkoutProps> = () => {
     const [cartItems, setCartItems] = useState<Array<[string, ProductType, number]>>();
     const [totalPrice, setTotalPrice] = useState(0);
-    const [isCartValid, setIsCartValid] = useState<boolean>(false);
+    const [isCartValid, setIsCartValid] = useState<boolean>(true);
     const axios = useAxios();
     const navigate = useNavigate();
 
