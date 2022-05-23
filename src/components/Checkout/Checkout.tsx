@@ -74,7 +74,7 @@ const Checkout: React.FC<checkoutProps> = () => {
 
             axios.post('/order', {...values, orderItems: orderItems, orderDate: new Date().toISOString()})
                 .then((response: AxiosResponse) => {
-                    // TODO redirect to orders page
+                    navigate('/orders')
                 })
                 .catch((error: AxiosError) => {
                     console.log(error);

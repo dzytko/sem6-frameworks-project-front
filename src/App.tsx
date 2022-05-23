@@ -11,6 +11,7 @@ import ProductPage from './components/ProductPage/ProductPage';
 import Cart from './components/Cart/Cart';
 import ProductsPage from './components/ProductsPage/ProductsPage';
 import Checkout from './components/Checkout/Checkout';
+import OrdersPage from './components/OrdersPage/OrdersPage';
 
 export const TokenContext = React.createContext<{ token: string; setToken: Dispatch<SetStateAction<string>>; }>(
     {
@@ -52,6 +53,7 @@ function App() {
                         <Route path="/account" element={<AccountManagement/>}/>
                         <Route path="/cart" element={<Cart/>}/>
                         <Route path="/checkout" element={<Checkout/>}/>
+                        <Route path="/orders" element={<OrdersPage/>}/>
                     </Route>
                 </Routes>
             </Layout>

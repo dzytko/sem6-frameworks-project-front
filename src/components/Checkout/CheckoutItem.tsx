@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import {ProductType} from '../../types/ProductType';
-import {Col, ListGroupItem} from 'react-bootstrap';
+import {ListGroupItem} from 'react-bootstrap';
 import useAxios from '../../hooks/useAxios';
 import {AxiosError, AxiosResponse} from 'axios';
 
@@ -25,11 +25,11 @@ const CheckoutItem: React.FC<CheckoutItemProps> = ({product, quantity}) => {
 
 
     return (
-        <ListGroupItem className={'row d-flex justify-content-between align-items-center mx-0'}>
-            <Col lg={3}>
+        <ListGroupItem className={'d-flex align-items-center mx-0'}>
+            <div>
                 <img src={imagePath || 'https://via.placeholder.com/100x100'} alt={''} width={100} height={100}/>
-            </Col>
-            <Col lg={8}>
+            </div>
+            <div className={'w-100 px-2'}>
                 <h4>{product.productName}</h4>
                 <div className={'d-flex justify-content-between'}>
                     <span>{quantity} pcs</span>
@@ -42,7 +42,7 @@ const CheckoutItem: React.FC<CheckoutItemProps> = ({product, quantity}) => {
                         </span>
                     </div>
                 </div>
-            </Col>
+            </div>
         </ListGroupItem>
 
     );
