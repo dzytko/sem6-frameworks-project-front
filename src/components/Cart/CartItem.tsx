@@ -8,13 +8,13 @@ import {ProductType} from '../../types/ProductType';
 import useAxios from '../../hooks/useAxios';
 
 interface cartItemProps {
-    id: string;
+    cartItemId: string;
     product: ProductType;
     quantity: number;
     setCartItems: Dispatch<SetStateAction<[string, ProductType, number][] | undefined>>;
 }
 
-const CartItem: React.FC<cartItemProps> = ({id, product, quantity, setCartItems}) => {
+const CartItem: React.FC<cartItemProps> = ({cartItemId, product, quantity, setCartItems}) => {
     const [imagePath, setImagePath] = useState<string>('');
     const axios = useAxios();
 
@@ -23,12 +23,16 @@ const CartItem: React.FC<cartItemProps> = ({id, product, quantity, setCartItems}
             quantity: quantity,
         },
         onSubmit: values => {
+            axios.patch(`cart-item/${cartItemId}`, values)
+                .catch((error: AxiosError) => {
+                    console.log(error);
+                });
         },
     });
 
     const removeItemFormik = useFormik({
         initialValues: {
-            id: id,
+            id: cartItemId,
         },
         onSubmit: values => {
             axios.delete(`cart-item/${values.id}`)
@@ -58,8 +62,8 @@ const CartItem: React.FC<cartItemProps> = ({id, product, quantity, setCartItems}
     useEffect(() => {
         setCartItems(prevState => {
             return prevState?.map(item => { // this is bad
-                if (item[0] === id) {
-                    return [id, product, quantityFormik.values.quantity];
+                if (item[0] === cartItemId) {
+                    return [cartItemId, product, quantityFormik.values.quantity];
                 }
                 return item;
             });
@@ -89,7 +93,7 @@ const CartItem: React.FC<cartItemProps> = ({id, product, quantity, setCartItems}
                         name="quantity"
                         id="inputQuantity"
                         autoComplete="off"
-                        onChange={quantityFormik.handleChange}
+                        onChange={(event) => {quantityFormik.handleChange(event); quantityFormik.handleSubmit()}}
                         value={quantityFormik.values.quantity}
                         min={1}
                         max={99}

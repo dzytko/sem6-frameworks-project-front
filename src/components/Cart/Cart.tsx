@@ -39,7 +39,7 @@ const Cart: React.FC<cartProps> = () => {
                 </CardHeader>
                 <div>
                     {cartItems && cartItems.map((item: [string, ProductType, number]) => {
-                        return <CartItem key={item[0]} id={item[0]} product={item[1]} quantity={item[2]} setCartItems={setCartItems}/>;
+                        return <CartItem key={item[0]} cartItemId={item[0]} product={item[1]} quantity={item[2]} setCartItems={setCartItems}/>;
                     })}
                 </div>
             </Card>
