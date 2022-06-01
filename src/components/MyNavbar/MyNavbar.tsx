@@ -36,6 +36,9 @@ const getUserLinks = () => {
             <LinkContainer to="/account" className={'text-dark dropdown-item'}>
                 <Nav.Link>Account management</Nav.Link>
             </LinkContainer>
+            <LinkContainer to="/orders" className={'text-dark dropdown-item'}>
+                <Nav.Link>Orders</Nav.Link>
+            </LinkContainer>
             <Nav.Link onClick={logout} className={'text-dark dropdown-item'}>Logout</Nav.Link>
         </>
     );
