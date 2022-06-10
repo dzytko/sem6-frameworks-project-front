@@ -62,7 +62,7 @@ const ProductsPage: FC<ProductsPageProps> = () => {
             params: {
                 // for some reason sortBy is not set on initial request
                 'sort-by': sortBy || 'productName',
-                'sort-order': sortOrder || 'asc',
+                'order-by': sortOrder || 'asc',
             }
         };
 
@@ -100,7 +100,7 @@ const ProductsPage: FC<ProductsPageProps> = () => {
                         <Form>
                             <Form.Select name={'sort'} onChange={formik.handleChange}>
                                 <option value={'productName-asc'}>Name: A-Z</option>
-                                <option value={'productName -desc'}>Name: Z-A</option>
+                                <option value={'productName-desc'}>Name: Z-A</option>
                                 <option value={'price-asc'}>Price: ascending</option>
                                 <option value={'price-desc'}>Price: descending</option>
                             </Form.Select>
