@@ -81,16 +81,24 @@ const ProductPage: FC<ProductProps> = () => {
                 .then((response: AxiosResponse) => {
                     setShowSuccessToast(true);
                 })
-                .catch((err: AxiosError) => {
-                    if (err.response?.status === 409) {
-                        axios.patch('cart-item/' + err.response?.data.cartItem._id, {quantity: err.response?.data.cartItem.quantity + values.quantity})
-                            .then((response: AxiosResponse) => {
-                                setShowSuccessToast(true);
-                            })
-                            .catch((err: AxiosError) => {
-                                console.log(err);
-                            });
+                .catch(async (err: AxiosError) => {
+                    if (err.response?.status !== 409) {
+                        return;
                     }
+
+                    let cartItems: any[] = await axios.get('cart-item/');
+                    let conflictItem = cartItems.find(item => item.productId === values.productId)[0]
+                    if (conflictItem === null) {
+                        return;
+                    }
+
+                    axios.patch('cart-item/' + conflictItem._id, {quantity: conflictItem.quantity + values.quantity})
+                        .then((response: AxiosResponse) => {
+                            setShowSuccessToast(true);
+                        })
+                        .catch((err: AxiosError) => {
+                            console.log(err);
+                        });
                 });
         },
     });
