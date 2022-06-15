@@ -73,7 +73,8 @@ const Checkout: React.FC<checkoutProps> = () => {
             });
 
             axios.post('/order', {...values, orderItems: orderItems, orderDate: new Date().toISOString()})
-                .then((response: AxiosResponse) => {
+                .then(async (response: AxiosResponse) => {
+                    await axios.delete('/cart-item')
                     navigate('/orders')
                 })
                 .catch((error: AxiosError) => {
